@@ -6,14 +6,15 @@ type Grid[E comparable] struct {
 	N    int
 }
 
-func NewGrid[E comparable](m, n int, startValue E) *Grid[E] {
-	g := Grid[E]{}
-	g.Rows = make([][]E, m)
+func NewGrid[E comparable](m, n int) *Grid[E] {
+	g := Grid[E]{
+		M:    m,
+		N:    n,
+		Rows: make([][]E, m),
+	}
 	for i := range m {
 		g.Rows[i] = make([]E, n)
-		for j := range n {
-			g.Rows[i][j] = startValue
-		}
 	}
+
 	return &g
 }

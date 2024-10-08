@@ -10,7 +10,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	game, err := gameoflife.NewGame(conf)
+	if err != nil {
+		panic(err)
+	}
 
-	game := gameoflife.NewGame(conf)
 	game.Start()
 }

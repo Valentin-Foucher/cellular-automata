@@ -7,10 +7,10 @@ import (
 	"golang.org/x/exp/rand"
 )
 
-type Grid = common.Grid[bool]
+type Grid = common.TwoDimensionalGrid[bool]
 
 func newGrid(m, n int) *Grid {
-	return common.NewGrid[bool](m, n)
+	return common.NewTwoDimensionalGrid[bool](m, n)
 }
 
 func initializeGrid(m, n int, distribution float32) *Grid {

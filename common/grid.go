@@ -1,13 +1,13 @@
 package common
 
-type Grid[E comparable] struct {
+type TwoDimensionalGrid[E comparable] struct {
 	Rows [][]E
 	M    int
 	N    int
 }
 
-func NewGrid[E comparable](m, n int) *Grid[E] {
-	g := Grid[E]{
+func NewTwoDimensionalGrid[E comparable](m, n int) *TwoDimensionalGrid[E] {
+	g := TwoDimensionalGrid[E]{
 		M:    m,
 		N:    n,
 		Rows: make([][]E, m),

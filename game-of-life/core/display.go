@@ -24,7 +24,7 @@ func (*ConsoleDisplay) ShowGrid(g *Grid) {
 	fmt.Print("\n")
 }
 
-func (*ConsoleDisplay) EraseGrid(g *Grid) {
+func (*ConsoleDisplay) EraseGrid() {
 	fmt.Print("\033[H\033[2J")
 }
 

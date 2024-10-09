@@ -1,16 +1,16 @@
 package main
 
 import (
-	core2d "cellular-automation/2d/core"
+	game2d "cellular-automation/2d/game"
 	"cellular-automation/common"
 )
 
 func main() {
-	conf, err := common.ReadConfiguration[core2d.Configuration]("2d/configs/default.yaml")
+	conf, err := common.ReadConfiguration[game2d.Configuration]("2d/configs/default.yaml")
 	if err != nil {
 		panic(err)
 	}
-	game, err := core2d.NewGame(conf)
+	game, err := game2d.NewGame(conf)
 	if err != nil {
 		panic(err)
 	}

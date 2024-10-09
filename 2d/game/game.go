@@ -1,4 +1,4 @@
-package core2d
+package game2d
 
 import (
 	automata2d "cellular-automation/2d/automata"
@@ -12,10 +12,10 @@ const (
 )
 
 type Game struct {
-	Grid      *grid2d.BaseGrid
-	Steps     int
+	grid      *grid2d.BaseGrid
 	display   display2d.Display
 	automaton automata2d.BaseAutomaton
+	maxSteps  int
 	sleepTime float32
 }
 
@@ -30,8 +30,8 @@ func NewGame(conf *Configuration) (*Game, error) {
 	}
 
 	return &Game{
-		Grid:      grid2d.Initialize(conf.M, conf.N, conf.Distribution),
-		Steps:     conf.Steps,
+		grid:      grid2d.Initialize(conf.M, conf.N, conf.Distribution),
+		maxSteps:  conf.Steps,
 		display:   display,
 		automaton: automaton,
 		sleepTime: conf.SleepTime,
@@ -39,11 +39,11 @@ func NewGame(conf *Configuration) (*Game, error) {
 }
 
 func (g *Game) Start() {
-	g.display.Show(g.Grid)
-	for range g.Steps {
-		g.Grid = g.automaton.NextState(g.Grid)
+	g.display.Show(g.grid)
+	for range g.maxSteps {
+		g.grid = g.automaton.NextState(g.grid)
 		g.display.Erase()
-		g.display.Show(g.Grid)
+		g.display.Show(g.grid)
 		time.Sleep(time.Duration(g.sleepTime * nanosecondsInOneSecond))
 	}
 }

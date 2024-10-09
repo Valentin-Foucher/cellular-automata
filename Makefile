@@ -8,5 +8,5 @@ help:
 	| column -t -s '###'
 
 #: Start the 2d implementation
-2d:
+run-2d:
 	go run ./2d/cmd/main.go

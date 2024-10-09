@@ -1,4 +1,4 @@
-package core2d
+package game2d
 
 type Configuration struct {
 	M            int     `yaml:"m"`

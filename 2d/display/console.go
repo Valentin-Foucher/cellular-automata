@@ -7,7 +7,7 @@ import (
 
 type ConsoleDisplay struct{}
 
-func (*ConsoleDisplay) Show(g grid2d.Grid) {
+func (*ConsoleDisplay) Print(g grid2d.Grid) {
 	for i := range g.Width() {
 		for j := range g.Height() {
 			if g.Get(i, j).(bool) {
@@ -21,6 +21,6 @@ func (*ConsoleDisplay) Show(g grid2d.Grid) {
 	fmt.Print("\n")
 }
 
-func (*ConsoleDisplay) Erase() {
+func (*ConsoleDisplay) Flush() {
 	fmt.Print("\033[H\033[2J")
 }

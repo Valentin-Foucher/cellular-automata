@@ -9,4 +9,5 @@ type Configuration struct {
 	Distribution float32 `yaml:"distribution"`
 	SleepTime    float32 `yaml:"sleep_time"`
 	AntsCount    int     `yaml:"ants_count"`
+	Delay        int     `yaml:"delay"`
 }

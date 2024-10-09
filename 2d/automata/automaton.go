@@ -1,6 +1,7 @@
 package automata2d
 
 import (
+	config2d "cellular-automation/2d/configs"
 	grid2d "cellular-automation/2d/grid"
 	"errors"
 )
@@ -29,8 +30,8 @@ func nextStateForAllCells(grid grid2d.Grid, nextStateForCell func(int, int, int,
 	return newGrid
 }
 
-func Get(automatonType string) (BaseAutomaton, error) {
-	switch automatonType {
+func Get(conf *config2d.Configuration) (BaseAutomaton, error) {
+	switch conf.Automaton {
 	case "gol":
 		return &GameOfLifeAutomaton{}, nil
 	case "seeds":

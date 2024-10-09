@@ -1,8 +1,9 @@
-m: 30
-n: 30
-steps: 5000
-display: console
-automaton: seeds
+m: 100
+n: 100
+steps: 12000
+display: gif
+automaton: langton_ants
 distribution: 0.2
-sleep_time: 0.01
+sleep_time: 0.001
 ants_count: 1
+delay: 0.01

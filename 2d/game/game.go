@@ -21,11 +21,11 @@ type Game struct {
 }
 
 func NewGame(conf *config2d.Configuration) (*Game, error) {
-	display, err := display2d.Get(conf.Display)
+	display, err := display2d.Get(conf)
 	if err != nil {
 		return nil, err
 	}
-	automaton, err := automata2d.Get(conf.Automaton)
+	automaton, err := automata2d.Get(conf)
 	if err != nil {
 		return nil, err
 	}
@@ -44,11 +44,27 @@ func NewGame(conf *config2d.Configuration) (*Game, error) {
 }
 
 func (g *Game) Start() {
-	g.display.Show(g.grid)
+	if _, ok := g.display.(*display2d.ConsoleDisplay); ok {
+		g.liveStrategy()
+	} else {
+		g.deferredStrategy()
+	}
+}
+
+func (g *Game) liveStrategy() {
+	g.display.Print(g.grid)
 	for range g.maxSteps {
 		g.grid = g.automaton.NextState(g.grid)
-		g.display.Erase()
-		g.display.Show(g.grid)
+		g.display.Flush()
+		g.display.Print(g.grid)
 		time.Sleep(time.Duration(g.sleepTime * nanosecondsInOneSecond))
 	}
+}
+
+func (g *Game) deferredStrategy() {
+	for range g.maxSteps {
+		g.display.Print(g.grid)
+		g.grid = g.automaton.NextState(g.grid)
+	}
+	g.display.Flush()
 }

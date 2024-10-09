@@ -1,25 +1,30 @@
-package gameoflife
+package core2d
 
-import "time"
+import (
+	automata2d "cellular-automation/2d/automata"
+	display2d "cellular-automation/2d/display"
+	"cellular-automation/common"
+	"time"
+)
 
 const (
 	nanosecondsInOneSecond = 1_000_000_000
 )
 
 type Game struct {
-	Grid      *Grid
+	Grid      *common.BaseGrid
 	Steps     int
-	display   Display
-	automaton Automaton
+	display   display2d.Display
+	automaton automata2d.BaseAutomaton
 	sleepTime float32
 }
 
 func NewGame(conf *Configuration) (*Game, error) {
-	display, err := getDisplay(conf)
+	display, err := display2d.Get(conf.Display)
 	if err != nil {
 		return nil, err
 	}
-	automaton, err := getAutomaton(conf)
+	automaton, err := automata2d.Get(conf.Automaton)
 	if err != nil {
 		return nil, err
 	}

@@ -1,16 +1,11 @@
-package gameoflife
+package automata2d
 
-import (
-	"cellular-automation/common"
-	"errors"
-)
-
-type Automaton = common.Automaton[bool]
+import "cellular-automation/common"
 
 type GameOfLifeAutomaton struct{}
 
-func (a *GameOfLifeAutomaton) NextState(grid *Grid) *Grid {
-	newGrid := newGrid(grid.M, grid.N)
+func (a *GameOfLifeAutomaton) NextState(grid *common.BaseGrid) *common.BaseGrid {
+	newGrid := common.NewBaseGrid(grid.M, grid.N)
 
 	for i := range grid.M {
 		for j := range grid.N {
@@ -45,14 +40,5 @@ func (a *GameOfLifeAutomaton) nextStateForCell(i, j, m, n int, rows [][]bool) bo
 		return true
 	default:
 		return false
-	}
-}
-
-func getAutomaton(conf *Configuration) (Automaton, error) {
-	switch conf.Automaton {
-	case "gol":
-		return &GameOfLifeAutomaton{}, nil
-	default:
-		return nil, errors.New("invalid automaton configuraton")
 	}
 }

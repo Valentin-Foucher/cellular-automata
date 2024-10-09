@@ -1,4 +1,4 @@
-package gameoflife
+package display2d
 
 import (
 	"cellular-automation/common"
@@ -6,11 +6,9 @@ import (
 	"fmt"
 )
 
-type Display = common.Display[bool]
-
 type ConsoleDisplay struct{}
 
-func (*ConsoleDisplay) ShowGrid(g *Grid) {
+func (*ConsoleDisplay) ShowGrid(g *common.BaseGrid) {
 	for i := range g.M {
 		for j := range g.N {
 			if g.Rows[i][j] {
@@ -28,8 +26,8 @@ func (*ConsoleDisplay) EraseGrid() {
 	fmt.Print("\033[H\033[2J")
 }
 
-func getDisplay(conf *Configuration) (Display, error) {
-	switch conf.Display {
+func Get(displayType string) (Display, error) {
+	switch displayType {
 	case "console":
 		return &ConsoleDisplay{}, nil
 	default:

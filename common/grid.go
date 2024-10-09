@@ -6,6 +6,8 @@ type TwoDimensionalGrid[E comparable] struct {
 	N    int
 }
 
+type BaseGrid = TwoDimensionalGrid[bool]
+
 func NewTwoDimensionalGrid[E comparable](m, n int) *TwoDimensionalGrid[E] {
 	g := TwoDimensionalGrid[E]{
 		M:    m,
@@ -17,4 +19,8 @@ func NewTwoDimensionalGrid[E comparable](m, n int) *TwoDimensionalGrid[E] {
 	}
 
 	return &g
+}
+
+func NewBaseGrid(m, n int) *BaseGrid {
+	return NewTwoDimensionalGrid[bool](m, n)
 }

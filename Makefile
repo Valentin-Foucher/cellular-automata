@@ -7,6 +7,6 @@ help:
 	| sed -n 's/^#: \(.*\)###\(.*\):.*/\2###\1/p' \
 	| column -t -s '###'
 
-#: Start the game of life
-gol:
-	go run ./game-of-life/cmd/main.go
+#: Start the 2d implementation
+2d:
+	go run ./2d/cmd/main.go

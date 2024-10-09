@@ -1,4 +1,4 @@
-package gameoflife
+package core2d
 
 import (
 	"cellular-automation/common"
@@ -7,16 +7,10 @@ import (
 	"golang.org/x/exp/rand"
 )
 
-type Grid = common.TwoDimensionalGrid[bool]
-
-func newGrid(m, n int) *Grid {
-	return common.NewTwoDimensionalGrid[bool](m, n)
-}
-
-func initializeGrid(m, n int, distribution float32) *Grid {
+func initializeGrid(m, n int, distribution float32) *common.BaseGrid {
 	rand.Seed(uint64(time.Now().UnixNano()))
 
-	g := newGrid(m, n)
+	g := common.NewBaseGrid(m, n)
 	for i := range m {
 		for j := range n {
 			g.Rows[i][j] = rand.Float32() < distribution

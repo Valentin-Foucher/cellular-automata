@@ -2,16 +2,15 @@ package display2d
 
 import (
 	grid2d "cellular-automation/2d/grid"
-	"errors"
 	"fmt"
 )
 
 type ConsoleDisplay struct{}
 
-func (*ConsoleDisplay) Show(g *grid2d.BaseGrid) {
-	for i := range g.M {
-		for j := range g.N {
-			if g.Content[i][j] {
+func (*ConsoleDisplay) Show(g grid2d.Grid) {
+	for i := range g.Width() {
+		for j := range g.Height() {
+			if g.Get(i, j).(bool) {
 				fmt.Print("⬜️")
 			} else {
 				fmt.Print("  ")
@@ -24,13 +23,4 @@ func (*ConsoleDisplay) Show(g *grid2d.BaseGrid) {
 
 func (*ConsoleDisplay) Erase() {
 	fmt.Print("\033[H\033[2J")
-}
-
-func Get(displayType string) (Display, error) {
-	switch displayType {
-	case "console":
-		return &ConsoleDisplay{}, nil
-	default:
-		return nil, errors.New("invalid display configuraton")
-	}
 }

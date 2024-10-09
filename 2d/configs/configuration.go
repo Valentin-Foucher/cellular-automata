@@ -1,4 +1,4 @@
-package game2d
+package config2d
 
 type Configuration struct {
 	M            int     `yaml:"m"`
@@ -8,4 +8,5 @@ type Configuration struct {
 	Automaton    string  `yaml:"automaton"`
 	Distribution float32 `yaml:"distribution"`
 	SleepTime    float32 `yaml:"sleep_time"`
+	AntsCount    int     `yaml:"ants_count"`
 }

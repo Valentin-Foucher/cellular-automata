@@ -4,19 +4,26 @@ import grid2d "cellular-automation/2d/grid"
 
 type SeedsAutomaton struct{}
 
-func (a *SeedsAutomaton) NextState(grid *grid2d.BaseGrid) *grid2d.BaseGrid {
-	newGrid := grid2d.NewBaseGrid(grid.M, grid.N)
+func (a *SeedsAutomaton) NextState(grid grid2d.Grid) grid2d.Grid {
+	m, n := grid.Width(), grid.Height()
+	newGrid := grid2d.NewBooleanGrid(m, n)
 
-	for i := range grid.M {
-		for j := range grid.N {
-			newGrid.Content[i][j] = a.nextStateForCell(i, j, grid.M, grid.N, grid.Content)
+	for i := range m {
+		for j := range n {
+			newGrid.Content[i][j] = a.nextStateForCell(
+				i,
+				j,
+				m,
+				n,
+				func(k, l int) bool { return grid.Get(k, l).(bool) },
+			)
 		}
 	}
 	return newGrid
 }
 
-func (a *SeedsAutomaton) nextStateForCell(i, j, m, n int, rows [][]bool) bool {
-	alive := rows[i][j]
+func (a *SeedsAutomaton) nextStateForCell(i, j, m, n int, get func(k, l int) bool) bool {
+	alive := get(i, j)
 	if alive {
 		return false
 	}
@@ -30,7 +37,7 @@ func (a *SeedsAutomaton) nextStateForCell(i, j, m, n int, rows [][]bool) bool {
 				continue
 			}
 
-			if rows[i+k][j+l] {
+			if get(i+k, j+l) {
 				adjacentAliveCells++
 			}
 		}

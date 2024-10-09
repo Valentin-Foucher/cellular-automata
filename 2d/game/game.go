@@ -2,6 +2,7 @@ package game2d
 
 import (
 	automata2d "cellular-automation/2d/automata"
+	config2d "cellular-automation/2d/configs"
 	display2d "cellular-automation/2d/display"
 	grid2d "cellular-automation/2d/grid"
 	"time"
@@ -12,14 +13,14 @@ const (
 )
 
 type Game struct {
-	grid      *grid2d.BaseGrid
+	grid      grid2d.Grid
 	display   display2d.Display
 	automaton automata2d.BaseAutomaton
 	maxSteps  int
 	sleepTime float32
 }
 
-func NewGame(conf *Configuration) (*Game, error) {
+func NewGame(conf *config2d.Configuration) (*Game, error) {
 	display, err := display2d.Get(conf.Display)
 	if err != nil {
 		return nil, err
@@ -28,9 +29,13 @@ func NewGame(conf *Configuration) (*Game, error) {
 	if err != nil {
 		return nil, err
 	}
+	grid, err := grid2d.Initialize(conf)
+	if err != nil {
+		return nil, err
+	}
 
 	return &Game{
-		grid:      grid2d.Initialize(conf.M, conf.N, conf.Distribution),
+		grid:      grid,
 		maxSteps:  conf.Steps,
 		display:   display,
 		automaton: automaton,

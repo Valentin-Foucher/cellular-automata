@@ -1,6 +1,6 @@
 package common
 
-type Display[E comparable] interface {
-	ShowGrid(*TwoDimensionalGrid[E])
-	EraseGrid()
+type Display[W any] interface {
+	Show(*W)
+	Erase()
 }

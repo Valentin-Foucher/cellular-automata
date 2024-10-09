@@ -1,15 +1,15 @@
 package automata2d
 
-import "cellular-automation/common"
+import grid2d "cellular-automation/2d/grid"
 
 type SeedsAutomaton struct{}
 
-func (a *SeedsAutomaton) NextState(grid *common.BaseGrid) *common.BaseGrid {
-	newGrid := common.NewBaseGrid(grid.M, grid.N)
+func (a *SeedsAutomaton) NextState(grid *grid2d.BaseGrid) *grid2d.BaseGrid {
+	newGrid := grid2d.NewBaseGrid(grid.M, grid.N)
 
 	for i := range grid.M {
 		for j := range grid.N {
-			newGrid.Rows[i][j] = a.nextStateForCell(i, j, grid.M, grid.N, grid.Rows)
+			newGrid.Content[i][j] = a.nextStateForCell(i, j, grid.M, grid.N, grid.Content)
 		}
 	}
 	return newGrid

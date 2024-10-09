@@ -1,12 +1,12 @@
 package automata2d
 
 import (
-	"cellular-automation/common"
+	grid2d "cellular-automation/2d/grid"
 	"errors"
 )
 
 type Automaton2D[E comparable] interface {
-	NextState(*common.TwoDimensionalGrid[E]) *common.TwoDimensionalGrid[E]
+	NextState(*grid2d.TwoDimensionalGrid[E]) *grid2d.TwoDimensionalGrid[E]
 }
 
 type BaseAutomaton = Automaton2D[bool]

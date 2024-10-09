@@ -1,17 +1,17 @@
 package display2d
 
 import (
-	"cellular-automation/common"
+	grid2d "cellular-automation/2d/grid"
 	"errors"
 	"fmt"
 )
 
 type ConsoleDisplay struct{}
 
-func (*ConsoleDisplay) ShowGrid(g *common.BaseGrid) {
+func (*ConsoleDisplay) Show(g *grid2d.BaseGrid) {
 	for i := range g.M {
 		for j := range g.N {
-			if g.Rows[i][j] {
+			if g.Content[i][j] {
 				fmt.Print("⬜️")
 			} else {
 				fmt.Print("  ")
@@ -22,7 +22,7 @@ func (*ConsoleDisplay) ShowGrid(g *common.BaseGrid) {
 	fmt.Print("\n")
 }
 
-func (*ConsoleDisplay) EraseGrid() {
+func (*ConsoleDisplay) Erase() {
 	fmt.Print("\033[H\033[2J")
 }
 

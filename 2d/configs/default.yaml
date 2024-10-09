@@ -2,7 +2,7 @@ m: 30
 n: 30
 steps: 5000
 display: console
-automaton: langton_ants
+automaton: seeds
 distribution: 0.2
 sleep_time: 0.01
 ants_count: 1

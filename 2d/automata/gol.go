@@ -7,21 +7,7 @@ import (
 type GameOfLifeAutomaton struct{}
 
 func (a *GameOfLifeAutomaton) NextState(grid grid2d.Grid) grid2d.Grid {
-	m, n := grid.Width(), grid.Height()
-	newGrid := grid2d.NewBooleanGrid(m, n)
-
-	for i := range m {
-		for j := range n {
-			newGrid.Content[i][j] = a.nextStateForCell(
-				i,
-				j,
-				m,
-				n,
-				func(k, l int) bool { return grid.Get(k, l).(bool) },
-			)
-		}
-	}
-	return newGrid
+	return nextStateForAllCells(grid, a.nextStateForCell)
 }
 
 func (a *GameOfLifeAutomaton) nextStateForCell(i, j, m, n int, get func(k, l int) bool) bool {

@@ -1,8 +1,8 @@
 m: 100
 n: 100
-steps: 12000
+steps: 3000
 display: gif
-automaton: langton_ants
+automaton: day_and_night
 distribution: 0.2
 sleep_time: 0.001
 ants_count: 1

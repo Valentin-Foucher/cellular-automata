@@ -38,6 +38,8 @@ func Get(conf *config2d.Configuration) (BaseAutomaton, error) {
 		return &SeedsAutomaton{}, nil
 	case "langton_ants":
 		return &LangtonAntsAutomaton{}, nil
+	case "day_and_night":
+		return &DayAndNightAutomaton{}, nil
 	default:
 		return nil, errors.New("invalid automaton configuraton")
 	}

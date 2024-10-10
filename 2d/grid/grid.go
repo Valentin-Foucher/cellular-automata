@@ -51,12 +51,11 @@ func NewBaseGrid[E comparable, F any](m, n int) *BaseGrid[E, F] {
 
 func Initialize(conf *config2d.Configuration) (Grid, error) {
 	switch conf.Automaton {
-	case "gol":
-		return initializeBooleanGrid(conf.M, conf.N, conf.Distribution), nil
-	case "seeds":
+	case "gol", "seeds", "day_and_night":
 		return initializeBooleanGrid(conf.M, conf.N, conf.Distribution), nil
 	case "langton_ants":
 		return initializeLangtonAntGrid(conf.M, conf.N, conf.AntsCount), nil
+
 	default:
 		return nil, errors.New("invalid automaton configuration")
 	}

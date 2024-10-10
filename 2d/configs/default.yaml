@@ -1,9 +1,9 @@
-m: 100
-n: 100
+m: 30
+n: 30
 steps: 3000
 display: gif
-automaton: day_and_night
+automaton: brians_brain
 distribution: 0.2
-sleep_time: 0.001
+sleep_time: 0.1
 ants_count: 1
-delay: 0.01
+delay: 0.1

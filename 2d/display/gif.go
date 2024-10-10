@@ -14,6 +14,18 @@ import (
 var (
 	black = color.Black
 	white = color.White
+	red   = color.RGBA{
+		R: 255,
+		G: 0,
+		B: 0,
+		A: 1,
+	}
+	yellow = color.RGBA{
+		R: 255,
+		G: 255,
+		B: 128,
+		A: 1,
+	}
 )
 
 type GifDisplay struct {
@@ -22,17 +34,31 @@ type GifDisplay struct {
 }
 
 func (d *GifDisplay) Print(g grid2d.Grid) {
-	frame := image.NewPaletted(image.Rect(0, 0, g.Width(), g.Height()), []color.Color{black, white})
+	frame := image.NewPaletted(image.Rect(0, 0, g.Width(), g.Height()), []color.Color{black, white, red, yellow})
 	for i := range g.Width() {
 		for j := range g.Height() {
 			var c color.Color
-			if g.Get(i, j).(bool) {
-				c = white
-			} else {
-				c = black
+
+			switch v := g.Get(i, j).(type) {
+			case bool:
+				if v {
+					c = white
+				} else {
+					c = black
+				}
+			case int:
+				switch v {
+				case grid2d.On:
+					c = red
+				case grid2d.Dying:
+					c = yellow
+				default:
+					c = black
+				}
 			}
 			frame.Set(i, j, c)
 		}
+
 		fmt.Print("\n")
 	}
 	fmt.Print("\n")

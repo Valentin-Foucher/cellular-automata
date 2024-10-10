@@ -10,12 +10,25 @@ type ConsoleDisplay struct{}
 func (*ConsoleDisplay) Print(g grid2d.Grid) {
 	for i := range g.Width() {
 		for j := range g.Height() {
-			if g.Get(i, j).(bool) {
-				fmt.Print("⬜️")
-			} else {
-				fmt.Print("  ")
+			switch v := g.Get(i, j).(type) {
+			case bool:
+				if v {
+					fmt.Print("⬜️")
+				} else {
+					fmt.Print("  ")
+				}
+			case int:
+				switch v {
+				case grid2d.On:
+					fmt.Print("🟥")
+				case grid2d.Dying:
+					fmt.Print("🟨")
+				default:
+					fmt.Print("  ")
+				}
 			}
 		}
+
 		fmt.Print("\n")
 	}
 	fmt.Print("\n")

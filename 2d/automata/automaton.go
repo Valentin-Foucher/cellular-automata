@@ -6,28 +6,10 @@ import (
 	"errors"
 )
 
-type Automaton2D[E comparable] interface {
-	NextState(grid2d.Grid) grid2d.Grid
-}
-
 type BaseAutomaton = Automaton2D[bool]
 
-func nextStateForAllCells(grid grid2d.Grid, nextStateForCell func(int, int, int, int, func(k, l int) bool) bool) grid2d.Grid {
-	m, n := grid.Width(), grid.Height()
-	newGrid := grid2d.NewBooleanGrid(m, n)
-
-	for i := range m {
-		for j := range n {
-			newGrid.Content[i][j] = nextStateForCell(
-				i,
-				j,
-				m,
-				n,
-				func(k, l int) bool { return grid.Get(k, l).(bool) },
-			)
-		}
-	}
-	return newGrid
+type Automaton2D[E comparable] interface {
+	NextState(grid2d.Grid) grid2d.Grid
 }
 
 func Get(conf *config2d.Configuration) (BaseAutomaton, error) {
@@ -40,6 +22,8 @@ func Get(conf *config2d.Configuration) (BaseAutomaton, error) {
 		return &LangtonAntsAutomaton{}, nil
 	case "day_and_night":
 		return &DayAndNightAutomaton{}, nil
+	case "brians_brain":
+		return &BriansBrainAutomaton{}, nil
 	default:
 		return nil, errors.New("invalid automaton configuraton")
 	}

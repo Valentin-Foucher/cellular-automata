@@ -7,7 +7,7 @@ import (
 type DayAndNightAutomaton struct{}
 
 func (a *DayAndNightAutomaton) NextState(grid grid2d.Grid) grid2d.Grid {
-	return nextStateForAllCells(grid, a.nextStateForCell)
+	return nextStateForAllBoolCells(grid, a.nextStateForCell)
 }
 
 func (a *DayAndNightAutomaton) nextStateForCell(i, j, m, n int, get func(k, l int) bool) bool {

@@ -7,21 +7,7 @@ import (
 type BriansBrainAutomaton struct{}
 
 func (a *BriansBrainAutomaton) NextState(grid grid2d.Grid) grid2d.Grid {
-	m, n := grid.Width(), grid.Height()
-	newGrid := grid2d.NewBriansBrainGrid(m, n)
-
-	for i := range m {
-		for j := range n {
-			newGrid.Content[i][j] = a.nextStateForCell(
-				i,
-				j,
-				m,
-				n,
-				func(k, l int) int { return grid.Get(k, l).(int) },
-			)
-		}
-	}
-	return newGrid
+	return nextStateForAllIntCells(grid, a.nextStateForCell)
 }
 
 func (a *BriansBrainAutomaton) nextStateForCell(i, j, m, n int, get func(k, l int) int) int {

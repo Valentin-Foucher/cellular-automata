@@ -15,7 +15,7 @@ const (
 type Game struct {
 	grid      grid2d.Grid
 	display   display2d.Display
-	automaton automata2d.BaseAutomaton
+	automaton automata2d.Automaton2D
 	maxSteps  int
 	sleepTime float32
 }

@@ -7,7 +7,7 @@ import (
 type GameOfLifeAutomaton struct{}
 
 func (a *GameOfLifeAutomaton) NextState(grid grid2d.Grid) grid2d.Grid {
-	return nextStateForAllCells(grid, a.nextStateForCell)
+	return nextStateForAllBoolCells(grid, a.nextStateForCell)
 }
 
 func (a *GameOfLifeAutomaton) nextStateForCell(i, j, m, n int, get func(k, l int) bool) bool {

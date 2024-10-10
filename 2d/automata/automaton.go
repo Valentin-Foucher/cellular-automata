@@ -6,13 +6,11 @@ import (
 	"errors"
 )
 
-type BaseAutomaton = Automaton2D[bool]
-
-type Automaton2D[E comparable] interface {
+type Automaton2D interface {
 	NextState(grid2d.Grid) grid2d.Grid
 }
 
-func Get(conf *config2d.Configuration) (BaseAutomaton, error) {
+func Get(conf *config2d.Configuration) (Automaton2D, error) {
 	switch conf.Automaton {
 	case "gol":
 		return &GameOfLifeAutomaton{}, nil

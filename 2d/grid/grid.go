@@ -56,7 +56,7 @@ func Initialize(conf *config2d.Configuration) (Grid, error) {
 	case "langton_ants":
 		return initializeLangtonAntGrid(conf.M, conf.N, conf.AntsCount), nil
 	case "brians_brain":
-		return initializeIntGrid(conf.M, conf.N, conf.Distribution), nil
+		return initializeBriansBrainGrid(conf.M, conf.N, conf.Distribution), nil
 	default:
 		return nil, errors.New("invalid automaton configuration")
 	}

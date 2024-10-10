@@ -5,7 +5,7 @@ import grid2d "cellular-automation/2d/grid"
 type SeedsAutomaton struct{}
 
 func (a *SeedsAutomaton) NextState(grid grid2d.Grid) grid2d.Grid {
-	return nextStateForAllCells(grid, a.nextStateForCell)
+	return nextStateForAllBoolCells(grid, a.nextStateForCell)
 }
 
 func (a *SeedsAutomaton) nextStateForCell(i, j, m, n int, get func(k, l int) bool) bool {

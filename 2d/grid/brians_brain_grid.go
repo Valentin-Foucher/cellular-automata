@@ -12,16 +12,10 @@ const (
 	Dying = 2
 )
 
-type BriansBrainGrid = BaseGrid[int, int]
-
-func NewBriansBrainGrid(m, n int) *BriansBrainGrid {
-	return NewBaseGrid[int, int](m, n)
-}
-
-func initializeIntGrid(m, n int, distribution float32) Grid {
+func initializeBriansBrainGrid(m, n int, distribution float32) Grid {
 	rand.Seed(uint64(time.Now().UnixNano()))
 
-	g := NewBriansBrainGrid(m, n)
+	g := NewIntGrid(m, n)
 
 	for i := range m {
 		for j := range n {
